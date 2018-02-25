@@ -8,7 +8,7 @@ public class Game extends JFrame {
 	public static Player player = new Player(100, 600);;
 
 	public static int gameCounter = 0;
-	private static int frameRate = 30;
+	private static int frameRate = 50;
 
 	public Game() {
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -25,9 +25,7 @@ public class Game extends JFrame {
 	public void init() {
 		// Key Listeners
 		addKeyListener(new KeyInput(this));
-		
-		
-		
+
 		// Create the Screen!
 		screen = new Screen();
 		this.add(screen);
@@ -37,20 +35,25 @@ public class Game extends JFrame {
 	// Global Key pressed
 	public void keyPressed(KeyEvent e) {
 		int key = e.getKeyCode();
-		final int SPEED = 10;
 
 		if (key == KeyEvent.VK_RIGHT)
-			player.setX(player.getX() + SPEED);
+			player.setVx(1);
 		else if (key == KeyEvent.VK_LEFT)
-			player.setX(player.getX() - SPEED);
+			player.setVx(-1);
 		else if (key == KeyEvent.VK_UP)
-			player.setY(player.getY() - SPEED);
+			player.setVy(-1);
 		else if (key == KeyEvent.VK_DOWN)
-			player.setY(player.getY() + SPEED);
+			player.setVy(1);
 
 	}
 
 	public void keyReleased(KeyEvent e) {
+		int key = e.getKeyCode();
+		/*
+		 * if (key == KeyEvent.VK_RIGHT) player.setVx(0); else if (key ==
+		 * KeyEvent.VK_LEFT) player.setVx(0); else if (key == KeyEvent.VK_UP)
+		 * player.setVy(0); else if (key == KeyEvent.VK_DOWN) player.setVy(0);
+		 */
 	}
 
 	// Main
@@ -65,6 +68,8 @@ public class Game extends JFrame {
 
 			// Increment the game counter
 			gameCounter++;
+
+			player.move();
 
 			// Draw the screen!
 			game.screen.repaint();
