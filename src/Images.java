@@ -3,8 +3,6 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
-import com.sun.prism.Image;
-
 public class Images {
 	// Import the Image from the res(RESOURCES) Folder
 

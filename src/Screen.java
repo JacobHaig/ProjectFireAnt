@@ -1,5 +1,4 @@
 import java.awt.Color;
-import java.awt.Font;
 import java.awt.Graphics;
 
 import javax.swing.JPanel;
@@ -24,6 +23,8 @@ public class Screen extends JPanel {
 		// Draw the Player
 		Game.player.render(g);
 
+		
+		/*
 		// Rectangles
 		g.setColor(new Color(0, 0, 255));
 		g.fillRect(120, 10, 200 + Game.gameCounter, 100);
@@ -37,7 +38,7 @@ public class Screen extends JPanel {
 		// Circles and Ovals
 		g.setColor(new Color(255, 100, 0));
 		g.drawOval(10, 150, 100, 100);
-		g.fillOval(120, 150, 200 + Game.gameCounter, 100);
+		g.fillOval(120, 150, 200 + Game.gameCounter, 100);*/
 
 	}
 }

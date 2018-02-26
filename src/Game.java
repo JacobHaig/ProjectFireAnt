@@ -1,5 +1,4 @@
 import java.awt.GridLayout;
-import java.awt.event.KeyEvent;
 
 import javax.swing.JFrame;
 
@@ -30,30 +29,6 @@ public class Game extends JFrame {
 		screen = new Screen();
 		this.add(screen);
 		this.setVisible(true);
-	}
-
-	// Global Key pressed
-	public void keyPressed(KeyEvent e) {
-		int key = e.getKeyCode();
-
-		if (key == KeyEvent.VK_RIGHT)
-			player.setVx(1);
-		else if (key == KeyEvent.VK_LEFT)
-			player.setVx(-1);
-		else if (key == KeyEvent.VK_UP)
-			player.setVy(-1);
-		else if (key == KeyEvent.VK_DOWN)
-			player.setVy(1);
-
-	}
-
-	public void keyReleased(KeyEvent e) {
-		int key = e.getKeyCode();
-		/*
-		 * if (key == KeyEvent.VK_RIGHT) player.setVx(0); else if (key ==
-		 * KeyEvent.VK_LEFT) player.setVx(0); else if (key == KeyEvent.VK_UP)
-		 * player.setVy(0); else if (key == KeyEvent.VK_DOWN) player.setVy(0);
-		 */
 	}
 
 	// Main
