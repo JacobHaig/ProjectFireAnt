@@ -3,10 +3,16 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
+//Import the Image from the res(RESOURCES) Folder
 public class Images {
-	// Import the Image from the res(RESOURCES) Folder
+	static Images image;
 
-	public BufferedImage getImage(String str) {
+	public static BufferedImage getImage(String arg) {
+		image = new Images();
+		return image.createImage(arg);
+	}
+
+	public BufferedImage createImage(String str) {
 
 		try {
 			return ImageIO.read(this.getClass().getResourceAsStream("/" + str));

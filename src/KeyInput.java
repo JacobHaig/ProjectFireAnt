@@ -24,6 +24,7 @@ public class KeyInput extends KeyAdapter {
 			player.setMovingDown(true);
 	}
 
+	// Global Key released
 	public void keyReleased(KeyEvent e) {
 		int key = e.getKeyCode();
 

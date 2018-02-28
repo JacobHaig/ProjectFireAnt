@@ -4,7 +4,8 @@ import javax.swing.JFrame;
 
 public class Game extends JFrame {
 	public Screen screen;
-	public static Player player = new Player(100, 600);;
+	public static Player player = new Player(100, 600);
+	public static Meteor m = new Meteor(400, 400);
 
 	public static int gameCounter = 0;
 	private static int frameRate = 50;
@@ -45,6 +46,7 @@ public class Game extends JFrame {
 			gameCounter++;
 
 			player.move();
+			m.move();
 
 			// Draw the screen!
 			game.screen.repaint();

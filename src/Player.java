@@ -2,44 +2,30 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 
-public class Player {
-	private double x;
-	private double y;
-	private double vx;
-	private double vy;
-
-	private boolean movingRight = false;
-	private boolean movingLeft = false;
-	private boolean movingUp = false;
-	private boolean movingDown = false;
-
-	final double DRAG = 0.95;
-	private double SPEED = 5;
-	private String imagefile = "stick-man.png";
-
+public class Player extends Character {
 	public double SCALE_FACTOR = (double) 1 / 8;
 
-	Images images = new Images();
-	private BufferedImage image = images.getImage(imagefile);
-	// private Graphics2D fliped = image.createGraphics().;
+	private BufferedImage imageRunning = Images.getImage("stick-man.png");
+	private BufferedImage imageStanding = Images.getImage("stick-man-standing.jpg");
 
 	Player(double x, double y) {
-		this.x = x;
-		this.y = y;
+		super(x, y);
 	}
 
+	@Override
 	public void render(Graphics g) {
-		int width = (int) (image.getWidth() * SCALE_FACTOR);
-		int height = (int) (image.getWidth() * SCALE_FACTOR);
-		int width2 = (int) (image.getWidth() * SCALE_FACTOR);
-		int height2 = (int) (image.getWidth() * SCALE_FACTOR);
+		int width = (int) (imageRunning.getWidth() * SCALE_FACTOR);
+		int height = (int) (imageRunning.getWidth() * SCALE_FACTOR);
 
-		g.drawImage(image, (int) x, (int) y, width, height, null);
-		g.drawImage(image, (int) x, (int) y, width, height, (int) x, (int) y, (int) x + width, (int) y + height , null);
-		//g.drawImage(image, (int) x, (int) y, width, height, 0, 0, 100, 100 , null);
-
+		if (movingLeft && !(movingRight))
+			g.drawImage(imageRunning, (int) x + width, (int) y, -width, height, null);
+		else if (movingRight && !(movingLeft))
+			g.drawImage(imageRunning, (int) x, (int) y, width, height, null);
+		else
+			g.drawImage(imageStanding, (int) x + width, (int) y, -width, height, null);
 	}
 
+	@Override
 	public void move() {
 		double up = (movingUp) ? 1 : 0;
 		double down = (movingDown) ? 1 : 0;
@@ -54,23 +40,6 @@ public class Player {
 
 		vy = (vy) * DRAG;
 		vx = (vx) * DRAG;
-
-	}
-
-	public void setX(double x) {
-		this.x = x;
-	}
-
-	public void setY(double y) {
-		this.y = y;
-	}
-
-	public double getX() {
-		return x;
-	}
-
-	public double getY() {
-		return y;
 	}
 
 	public void setMovingRight(boolean movingRight) {
