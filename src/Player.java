@@ -1,9 +1,9 @@
+import java.awt.Color;
 import java.awt.Graphics;
-import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 
 public class Player extends Character {
-	public double SCALE_FACTOR = (double) 1 / 8;
+	public boolean playerDEAD = false;
 
 	private BufferedImage imageRunning = Images.getImage("stick-man.png");
 	private BufferedImage imageStanding = Images.getImage("stick-man-standing.jpg");
@@ -14,15 +14,17 @@ public class Player extends Character {
 
 	@Override
 	public void render(Graphics g) {
-		int width = (int) (imageRunning.getWidth() * SCALE_FACTOR);
-		int height = (int) (imageRunning.getWidth() * SCALE_FACTOR);
-
 		if (movingLeft && !(movingRight))
-			g.drawImage(imageRunning, (int) x + width, (int) y, -width, height, null);
+			g.drawImage(imageRunning, (int) x + WIDTH, (int) y, -WIDTH, HEIGHT, null);
 		else if (movingRight && !(movingLeft))
-			g.drawImage(imageRunning, (int) x, (int) y, width, height, null);
+			g.drawImage(imageRunning, (int) x, (int) y, WIDTH, HEIGHT, null);
 		else
-			g.drawImage(imageStanding, (int) x + width, (int) y, -width, height, null);
+			g.drawImage(imageStanding, (int) x + WIDTH, (int) y, -WIDTH, HEIGHT, null);
+	}
+
+	public void drawHitbox(Graphics g) {
+		g.setColor(new Color(255, 0, 0));
+		g.drawOval((int) centerX - WIDTH / 2, (int) centerY - HEIGHT / 2, WIDTH, HEIGHT);
 	}
 
 	@Override
@@ -40,6 +42,8 @@ public class Player extends Character {
 
 		vy = (vy) * DRAG;
 		vx = (vx) * DRAG;
+
+		centerCoords();
 	}
 
 	public void setMovingRight(boolean movingRight) {
