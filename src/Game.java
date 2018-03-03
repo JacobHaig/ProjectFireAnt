@@ -47,19 +47,19 @@ public class Game extends JFrame {
 
 		// Main loop
 		while (true) {
-			// Sleep thread 30 fps = 1000 / 30
 			Utilities.sleepThread(1000 / frameRate);
-
-			// Increment the game counter
 			gameCounter++;
 
+			// MOVEMENT
 			player.move();
-
 			for (FallingItem m : meteors)
 				m.move();
-			for (FallingItem m : meteors)
+			for (FallingItem m : meteors) {
 				if (m.collision())
+					Stats.takeDamage();
+				if (Stats.getHealth() <= 0)
 					player.playerDEAD = true;
+			}
 
 			// Draw the screen!
 			game.screen.repaint();

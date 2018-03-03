@@ -6,7 +6,7 @@ public class Player extends Character {
 	public boolean playerDEAD = false;
 
 	private BufferedImage imageRunning = Images.getImage("stick-man.png");
-	private BufferedImage imageStanding = Images.getImage("stick-man-standing.jpg");
+	private BufferedImage imageStanding = Images.getImage("stick-man-standing.png");
 
 	Player(double x, double y) {
 		super(x, y);

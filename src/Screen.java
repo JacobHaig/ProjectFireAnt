@@ -1,10 +1,13 @@
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.image.BufferedImage;
 
 import javax.swing.JPanel;
 
 public class Screen extends JPanel {
+	private static BufferedImage background = Images.getImage("Game-Background.png");
+
 	Screen() {
 		// Calling repaint() calls everything need to paint() aswell as paint() itself
 
@@ -13,8 +16,7 @@ public class Screen extends JPanel {
 
 	// Clear the screen
 	private void clearScreen(Graphics g) {
-		g.setColor(new Color(255, 255, 255));
-		g.fillRect(0, 0, this.getWidth(), this.getHeight());
+		g.drawImage(background, 0, 0, this.getWidth(), this.getHeight(), null);
 	}
 
 	@Override
@@ -35,13 +37,8 @@ public class Screen extends JPanel {
 		for (FallingItem m : Game.meteors)
 			m.drawHitbox(g);
 
-		if (Game.player.playerDEAD) {
-			Font font = new Font("SansSerif", Font.BOLD, 108);
-			g.setFont(font);
-
-			g.drawString("YOU FOOL", 230, 200);
-			g.drawString("YOU DONE DIED", 80, 300);
-		}
+		g.setFont(new Font("SansSerif", Font.BOLD, 18));
+		Stats.render(g);
 
 		if (Game.player.playerDEAD) {
 			Font font = new Font("SansSerif", Font.BOLD, 108);
@@ -50,5 +47,7 @@ public class Screen extends JPanel {
 			g.drawString("YOU FOOL", 230, 200);
 			g.drawString("YOU DONE DIED", 80, 300);
 		}
+
+
 	}
 }

@@ -16,47 +16,37 @@ public class FallingItem extends Character {
 	private static BufferedImage imageNuke = Images.getImage("Nuke.png");
 	private static BufferedImage imageRocket = Images.getImage("Rocket.png");
 
+	private BufferedImage imageCurrent;
+
 	FallingItem(double x, double y) {
 		super(x, y);
 		switch (Utilities.random(4)) {
 		case 1:
 			item = ItemType.Meteor;
+			imageCurrent = imageMeteor;
 			break;
 		case 2:
 			item = ItemType.Health;
+			imageCurrent = imageBandage;
 			break;
 		case 3:
 			item = ItemType.Nuke;
+			imageCurrent = imageNuke;
 			break;
 		case 4:
 			item = ItemType.Rocket;
+			imageCurrent = imageRocket;
 			break;
-		default:
-			item = ItemType.Meteor;
-			break;
+
 		}
+
+		WIDTH = imageCurrent.getWidth();
+		HEIGHT = imageCurrent.getHeight();
 	}
 
 	@Override
 	public void render(Graphics g) {
-		switch (item) {
-		case Meteor:
-			g.drawImage(imageMeteor, (int) x, (int) y, WIDTH, HEIGHT, null);
-			break;
-		case Health:
-			g.drawImage(imageBandage, (int) x, (int) y, WIDTH, HEIGHT, null);
-			break;
-		case Nuke:
-			g.drawImage(imageNuke, (int) x, (int) y, WIDTH, HEIGHT, null);
-			break;
-		case Rocket:
-			g.drawImage(imageRocket, (int) x + WIDTH / 4, (int) y, WIDTH / 2, HEIGHT, null);
-			break;
-		default:
-			g.drawImage(imageMeteor, (int) x, (int) y, WIDTH, HEIGHT, null);
-			break;
-		}
-
+		g.drawImage(imageCurrent, (int) x, (int) y, WIDTH, HEIGHT, null);
 	}
 
 	public void drawHitbox(Graphics g) {
@@ -72,6 +62,8 @@ public class FallingItem extends Character {
 
 		int a = (int) Math.pow(x - Game.player.x, 2);
 		int b = (int) Math.pow(y - Game.player.y, 2);
+
+		// if(item.Health)
 
 		return (a + b < realDistance) ? true : false;
 	}
