@@ -9,7 +9,7 @@ public class Game extends JFrame {
 	private static int WINDOW_HEIGHT = 800;
 
 	public Screen screen;
-	public static List<Meteor> meteors = new ArrayList<Meteor>();
+	public static List<FallingItem> meteors = new ArrayList<FallingItem>();
 	public static Player player = new Player(100, 600);
 
 	public static int gameCounter = 0;
@@ -32,7 +32,7 @@ public class Game extends JFrame {
 		addKeyListener(new KeyInput(this));
 
 		for (int i = 0; i < 100; i++)
-			meteors.add(new Meteor(Utilities.random(0, WINDOW_WIDTH), Utilities.random(-10 * WINDOW_HEIGHT, 0)));
+			meteors.add(new FallingItem(Utilities.random(0, WINDOW_WIDTH), Utilities.random(-15 * WINDOW_HEIGHT, 0)));
 
 		// Create the Screen!
 		screen = new Screen();
@@ -55,9 +55,9 @@ public class Game extends JFrame {
 
 			player.move();
 
-			for (Meteor m : meteors)
+			for (FallingItem m : meteors)
 				m.move();
-			for (Meteor m : meteors)
+			for (FallingItem m : meteors)
 				if (m.collision())
 					player.playerDEAD = true;
 

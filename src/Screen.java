@@ -28,11 +28,11 @@ public class Screen extends JPanel {
 		Game.player.render(g);
 		Game.player.drawHitbox(g);
 
-		for (Meteor m : Game.meteors)
+		for (FallingItem m : Game.meteors)
 			m.render(g);
 
 		// Hit box
-		for (Meteor m : Game.meteors)
+		for (FallingItem m : Game.meteors)
 			m.drawHitbox(g);
 
 		if (Game.player.playerDEAD) {
