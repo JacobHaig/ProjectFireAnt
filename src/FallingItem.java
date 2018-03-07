@@ -46,6 +46,11 @@ public class FallingItem extends Character {
 
 	@Override
 	public void render(Graphics g) {
+		drawImage(g);
+		drawHitbox(g);
+	}
+
+	public void drawImage(Graphics g) {
 		g.drawImage(imageCurrent, (int) x, (int) y, WIDTH, HEIGHT, null);
 	}
 
@@ -56,12 +61,12 @@ public class FallingItem extends Character {
 	}
 
 	// Check for collision of the meteor
-	public boolean collision() {
+	public boolean collision(double xx, double yy) {
 		int distance = 50;
 		int realDistance = (int) Math.pow(distance, 2);// This is faster then having to Math.hypot()
 
-		int a = (int) Math.pow(x - Game.player.x, 2);
-		int b = (int) Math.pow(y - Game.player.y, 2);
+		int a = (int) Math.pow(x - xx, 2);
+		int b = (int) Math.pow(y - yy, 2);
 
 		// if(item.Health)
 

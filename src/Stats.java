@@ -1,3 +1,4 @@
+import java.awt.Font;
 import java.awt.Graphics;
 
 public class Stats {
@@ -15,6 +16,7 @@ public class Stats {
 
 	// Render Health
 	public static void render(Graphics g) {
+		g.setFont(new Font("SansSerif", Font.BOLD, 18));
 		g.drawString("Health: " + health, 10, 10);
 	}
 }

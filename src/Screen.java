@@ -27,27 +27,23 @@ public class Screen extends JPanel {
 		g.setColor(new Color(0, 0, 0));
 
 		// Draw the Player
-		Game.player.render(g);
-		Game.player.drawHitbox(g);
+		Tick.player.render(g);
+		
+		for (Bullet b : Tick.player.bullets)
+			b.render(g);
 
-		for (FallingItem m : Game.meteors)
-			m.render(g);
+		for (FallingItem o : Tick.fallingObjects)
+			o.render(g);
 
-		// Hit box
-		for (FallingItem m : Game.meteors)
-			m.drawHitbox(g);
-
-		g.setFont(new Font("SansSerif", Font.BOLD, 18));
 		Stats.render(g);
 
-		if (Game.player.playerDEAD) {
+		if (Tick.player.playerDEAD) {
 			Font font = new Font("SansSerif", Font.BOLD, 108);
 			g.setFont(font);
 
 			g.drawString("YOU FOOL", 230, 200);
 			g.drawString("YOU DONE DIED", 80, 300);
 		}
-
 
 	}
 }

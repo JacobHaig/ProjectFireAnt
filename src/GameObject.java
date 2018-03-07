@@ -1,5 +1,3 @@
-import java.awt.Graphics;
-
 public class GameObject {
 	protected int WIDTH = 100;
 	protected int HEIGHT = 100;
