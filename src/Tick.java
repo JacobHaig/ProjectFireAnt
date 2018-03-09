@@ -2,7 +2,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Tick extends Game {
-
 	private static int frameRate = 60;
 
 	public static Game game;
