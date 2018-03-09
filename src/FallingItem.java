@@ -51,24 +51,22 @@ public class FallingItem extends Character {
 	}
 
 	public void drawImage(Graphics g) {
-		g.drawImage(imageCurrent, (int) x, (int) y, WIDTH, HEIGHT, null);
+		g.drawImage(imageCurrent, (int) x - WIDTH / 2, (int) y - HEIGHT / 2, WIDTH, HEIGHT, null);
 	}
 
 	public void drawHitbox(Graphics g) {
-
-		g.drawOval((int) centerX - WIDTH / 2, (int) centerY - HEIGHT / 2, WIDTH, HEIGHT);
+		g.drawOval((int) x - WIDTH / 2, (int) y - HEIGHT / 2, WIDTH, HEIGHT);
+		g.drawOval((int) x - 25, (int) y - 25, 50, 50);
 		g.drawLine((int) getX(), (int) getY(), (int) (getX() + WIDTH), (int) getY());
 	}
 
 	// Check for collision of the meteor
 	public boolean collision(double xx, double yy) {
 		int distance = 50;
-		int realDistance = (int) Math.pow(distance, 2);// This is faster then having to Math.hypot()
+		int realDistance = (int) Math.pow(distance, 2); // This is faster then having to Math.hypot()
 
 		int a = (int) Math.pow(x - xx, 2);
 		int b = (int) Math.pow(y - yy, 2);
-
-		// if(item.Health)
 
 		return (a + b < realDistance) ? true : false;
 	}
@@ -81,7 +79,6 @@ public class FallingItem extends Character {
 
 		vy = (vy) * DRAG;
 		vx = (vx) * DRAG;
-		this.centerCoords();
 	}
 
 }

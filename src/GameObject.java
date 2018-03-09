@@ -5,17 +5,10 @@ public class GameObject {
 	protected double x;
 	protected double y;
 
-	protected double centerX;
-	protected double centerY;
 
 	GameObject(double x, double y) {
 		this.x = x;
 		this.y = y;
-	}
-
-	protected void centerCoords() {
-		centerX = x + WIDTH / 2;
-		centerY = y + HEIGHT / 2;
 	}
 
 	public void setX(double x) {

@@ -37,9 +37,9 @@ public class Game extends JFrame {
 		game = new Game();
 		Tick.Init(game);
 
-		while (true) {
+		while (true)
 			Tick.Tick();
-		}
+
 	}
 
 }

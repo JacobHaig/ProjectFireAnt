@@ -46,7 +46,7 @@ public class Tick extends Game {
 
 			// Destroy falling objects and remove health if collision
 			for (int m = 0; m < fallingObjects.size(); m++) {
-				if (fallingObjects.get(m).collision(player.centerX, player.centerY)) {
+				if (fallingObjects.get(m).collision(player.x, player.y)) {
 					Stats.takeDamage();
 					fallingObjects.remove(m);
 				}
@@ -57,7 +57,7 @@ public class Tick extends Game {
 			// Destroy bullets and falling objects if collision
 			for (int m = 0; m < fallingObjects.size(); m++)
 				for (int o = 0; o < player.bullets.size(); o++)
-					if (fallingObjects.get(m).collision(player.bullets.get(o).centerX, player.bullets.get(o).centerY)) {
+					if (fallingObjects.get(m).collision(player.bullets.get(o).x, player.bullets.get(o).y)) {
 						fallingObjects.remove(m);
 						player.bullets.remove(o);
 					}
