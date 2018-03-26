@@ -74,8 +74,9 @@ public class Player extends Character {
 
 	public void setAngle() {
 		if (MouseInput.isMouseInputEnabled()) {
-			double angle = Math.atan((MouseInput.getY() - this.y) / (MouseInput.getX() - this.x));
-			this.angle = angle;
+			double a = MouseInput.getX() - this.x;
+			double o = MouseInput.getY() - this.y;
+			this.angle = Math.atan2(o, a);
 		}
 	}
 
