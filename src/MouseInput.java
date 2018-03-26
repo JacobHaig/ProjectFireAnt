@@ -20,7 +20,7 @@ public class MouseInput implements MouseListener {
 			Point c = Game.screen.getMousePosition();
 
 			x = (int) c.getX();
-			y = (int) c.getX();
+			y = (int) c.getY();
 
 		} catch (Exception e) {
 		}
