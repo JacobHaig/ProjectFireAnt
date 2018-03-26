@@ -28,7 +28,7 @@ public class Screen extends JPanel {
 
 		// Draw the Player
 		Tick.player.render(g);
-		
+
 		for (Bullet b : Tick.player.bullets)
 			b.render(g);
 

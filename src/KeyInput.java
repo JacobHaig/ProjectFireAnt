@@ -1,3 +1,4 @@
+import java.awt.Point;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
@@ -15,13 +16,15 @@ public class KeyInput extends KeyAdapter {
 		int key = e.getKeyCode();
 
 		// Angle
+		/*
 		if (key == KeyEvent.VK_E)
 			player.setAimingRight(true);
 		else if (key == KeyEvent.VK_Q)
 			player.setAimingLeft(true);
-		else if (key == KeyEvent.VK_ENTER)
-			player.shoot();
-
+		//else if (key == KeyEvent)
+		//	player.shoot();
+		*/
+		
 		// Arrow Keys
 		if (key == KeyEvent.VK_RIGHT)
 			player.setMovingRight(true);
@@ -77,4 +80,6 @@ public class KeyInput extends KeyAdapter {
 			System.out.print("PAUSE GAME");
 
 	}
+
+
 }

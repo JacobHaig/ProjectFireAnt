@@ -20,6 +20,7 @@ public class FallingItem extends Character {
 
 	FallingItem(double x, double y) {
 		super(x, y);
+
 		switch (Utilities.random(4)) {
 		case 1:
 			item = ItemType.Meteor;
@@ -37,7 +38,6 @@ public class FallingItem extends Character {
 			item = ItemType.Rocket;
 			imageCurrent = imageRocket;
 			break;
-
 		}
 
 		WIDTH = imageCurrent.getWidth();
@@ -60,25 +60,12 @@ public class FallingItem extends Character {
 		g.drawLine((int) getX(), (int) getY(), (int) (getX() + WIDTH), (int) getY());
 	}
 
-	// Check for collision of the meteor
-	public boolean collision(double xx, double yy) {
-		int distance = 50;
-		int realDistance = (int) Math.pow(distance, 2); // This is faster then having to Math.hypot()
-
-		int a = (int) Math.pow(x - xx, 2);
-		int b = (int) Math.pow(y - yy, 2);
-
-		return (a + b < realDistance) ? true : false;
-	}
-
 	// MOVE THE STUFF
-	@Override
-	public void move() {
+	public void step() {
 		setY(getY() + GRAVITY);
 		setX(getX() + vx);
 
 		vy = (vy) * DRAG;
 		vx = (vx) * DRAG;
 	}
-
 }

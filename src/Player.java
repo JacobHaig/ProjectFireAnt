@@ -6,6 +6,7 @@ import java.util.ArrayList;
 public class Player extends Character {
 	public boolean playerDEAD = false;
 	public double angle = -Math.PI / 2;
+	public float AIMSPEED = 0.05f;
 
 	public boolean aimingLeft = false;
 	public boolean aimingRight = false;
@@ -36,7 +37,7 @@ public class Player extends Character {
 			g.drawImage(imageStanding, (int) x - WIDTH / 2, (int) y - HEIGHT / 2, WIDTH, HEIGHT, null);
 	}
 
-	// Draw the circle hit boxcc
+	// Draw the circle hit box
 	public void drawHitbox(Graphics g) {
 		g.setColor(new Color(255, 0, 0));
 		g.drawOval((int) x - WIDTH / 2, (int) y - HEIGHT / 2, WIDTH, HEIGHT);
@@ -50,25 +51,17 @@ public class Player extends Character {
 		g.drawLine((int) x, (int) y, coordX, coordY);
 	}
 
-	@Override
 	// Move the player and set angle
-	public void move() {
+	public void step() {
 		// Move player
-		double up = (movingUp) ? 1 : 0;
-		double down = (movingDown) ? 1 : 0;
-		vy = (down - up) * SPEED * DRAG;
-		double left = (movingRight) ? 1 : 0;
-		double right = (movingLeft) ? 1 : 0;
-		vx = (left - right) * SPEED * DRAG;
+		vy = (((movingDown) ? 1 : 0) - ((movingUp) ? 1 : 0)) * SPEED * DRAG; // Up and Down
+		vx = (((movingRight) ? 1 : 0) - ((movingLeft) ? 1 : 0)) * SPEED * DRAG; // Left and Right
 
 		setY(getY() + vy);
 		setX(getX() + vx);
 
 		// Move aiming direction
-		double aimleft = (aimingLeft) ? 1 : 0;
-		double aimright = (aimingRight) ? 1 : 0;
-		double changeAngle = (aimright - aimleft) * .05;
-		setAngle(getAngle() + changeAngle);
+		setAngle();
 	}
 
 	public void shoot() {
@@ -77,6 +70,17 @@ public class Player extends Character {
 
 	public void setAngle(double angle) {
 		this.angle = angle;
+	}
+
+	public void setAngle() {
+		if (MouseInput.isMouseInputEnabled()) {
+			double angle = Math.atan((MouseInput.getY() - this.y) / (MouseInput.getX() - this.x));
+			this.angle = angle;
+		}
+	}
+
+	public void addAngle(double angle) {
+		this.angle = this.angle + angle;
 	}
 
 	public double getAngle() {

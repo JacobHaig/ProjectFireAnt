@@ -8,10 +8,9 @@ public class Tick extends Game {
 	public static List<FallingItem> fallingObjects = new ArrayList<FallingItem>();
 	public static Player player = new Player(100, 600);
 
-	// Constuctor
+	// Constructor
 	public static void Init(Game g) {
 		game = g;
-
 		for (int i = 0; i < 100; i++)
 			fallingObjects
 					.add(new FallingItem(Utilities.random(0, WINDOW_WIDTH), Utilities.random(-15 * WINDOW_HEIGHT, 0)));
@@ -25,30 +24,34 @@ public class Tick extends Game {
 	// Pause Screen
 	public static void Pause() {
 		Utilities.sleepThread(1000 / frameRate);
-
 	}
 
 	// Play game like normal
-	public static void Tick() {
+	public static void Step() {
 		Utilities.sleepThread(1000 / frameRate);
 
+		if (MouseInput.isMouseInputEnabled()) 
+			MouseInput.updateMousePos();
+		
+
 		// MOVEMENT
-		player.move();
+		player.step();
 
 		for (Bullet b : player.bullets)
-			b.move();
+			b.step();
 
 		for (FallingItem m : fallingObjects)
-			m.move();
+			m.step();
 
 		try {
 
 			// Destroy falling objects and remove health if collision
 			for (int m = 0; m < fallingObjects.size(); m++) {
-				if (fallingObjects.get(m).collision(player.x, player.y)) {
+				if (Utilities.collision(fallingObjects.get(m), player)) {
 					Stats.takeDamage();
 					fallingObjects.remove(m);
 				}
+
 				if (Stats.getHealth() <= 0)
 					player.playerDEAD = true;
 			}
@@ -56,7 +59,7 @@ public class Tick extends Game {
 			// Destroy bullets and falling objects if collision
 			for (int m = 0; m < fallingObjects.size(); m++)
 				for (int o = 0; o < player.bullets.size(); o++)
-					if (fallingObjects.get(m).collision(player.bullets.get(o).x, player.bullets.get(o).y)) {
+					if (Utilities.collision(fallingObjects.get(m), player.bullets.get(o))) {
 						fallingObjects.remove(m);
 						player.bullets.remove(o);
 					}
@@ -66,6 +69,6 @@ public class Tick extends Game {
 		}
 
 		// Draw the screen!
-		game.screen.repaint();
+		Game.screen.repaint();
 	}
 }

@@ -19,4 +19,15 @@ public class Utilities {
 		}
 	}
 
+	// Works by using any derivative of a GameObject.
+	// GameObjects have protected methods
+	public static boolean collision(GameObject Obj1, GameObject Obj2) {
+		int distance = 50;
+		int realDistance = (int) distance * distance; // This is faster then having to Math.hypot()
+
+		int a = (int) Math.pow(Obj1.getX() - Obj2.getX(), 2);
+		int b = (int) Math.pow(Obj1.getY() - Obj2.getY(), 2);
+
+		return (a + b < realDistance) ? true : false;
+	}
 }

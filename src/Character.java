@@ -16,8 +16,7 @@ public abstract class Character extends GameObject {
 		super(x, y);
 	}
 
-	public abstract void move();
-
 	public abstract void render(Graphics g);
 
+	public abstract void step();
 }

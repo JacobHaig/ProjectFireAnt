@@ -5,8 +5,8 @@ import java.awt.image.BufferedImage;
 
 public class Bullet extends Character {
 	private double angle;
+	
 	private double SPEED = 10;
-
 	private int WIDTH = 50;
 	private int HEIGHT = 50;
 
@@ -17,8 +17,7 @@ public class Bullet extends Character {
 		this.angle = angle;
 	}
 
-	@Override
-	public void move() {
+	public void step() {
 		double vx = (double) (SPEED * (Math.cos(angle)));
 		double vy = (double) (SPEED * (Math.sin(angle)));
 
