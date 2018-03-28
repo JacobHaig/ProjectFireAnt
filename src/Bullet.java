@@ -34,8 +34,6 @@ public class Bullet extends Character {
 		AffineTransformOp op = new AffineTransformOp(AffineTransform.getRotateInstance(angle, WIDTH, HEIGHT),
 				AffineTransformOp.TYPE_BILINEAR);
 
-		// g.drawImage(imageCurrent, (int) x - WIDTH / 2, (int) y - HEIGHT / 2, WIDTH,
-		// HEIGHT, null);
 		g.drawImage(op.filter(imageCurrent, null), (int) x - WIDTH / 2, (int) y - HEIGHT / 2, null);
 	}
 }

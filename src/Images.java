@@ -5,14 +5,14 @@ import javax.imageio.ImageIO;
 
 //Import the Image from the res(RESOURCES) Folder
 public class Images {
-	static Images image;
+	private static Images image;
 
 	public static BufferedImage getImage(String arg) {
 		image = new Images();
 		return image.createImage(arg);
 	}
 
-	public BufferedImage createImage(String str) {
+	private BufferedImage createImage(String str) {
 
 		try {
 			return ImageIO.read(this.getClass().getResourceAsStream("/" + str));

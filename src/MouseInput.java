@@ -3,17 +3,10 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 public class MouseInput implements MouseListener {
-	private static Game game;
-	private static Player player;
 
 	private static boolean isMouseInputEnabled = false;
 	private static int x = Game.WIDTH / 2;
 	private static int y = Game.HEIGHT / 2;
-
-	public MouseInput(Game game) {
-		this.game = game;
-		this.player = Tick.player;
-	}
 
 	public static void updateMousePos() {
 		try {
@@ -46,18 +39,15 @@ public class MouseInput implements MouseListener {
 	@Override
 	public void mouseExited(MouseEvent arg0) {
 		isMouseInputEnabled = false;
-
 	}
 
 	@Override
 	public void mousePressed(MouseEvent arg0) {
-		player.shoot();
-
+		Tick.player.shoot();
 	}
 
 	@Override
 	public void mouseReleased(MouseEvent arg0) {
-
 	}
 
 	@Override

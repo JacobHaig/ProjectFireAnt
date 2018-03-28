@@ -1,7 +1,4 @@
-
 import java.awt.GridLayout;
-import java.awt.Point;
-
 import javax.swing.JFrame;
 
 public class Game extends JFrame {
@@ -10,7 +7,8 @@ public class Game extends JFrame {
 
 	public static Game game;
 	public static Screen screen;
-	public static Point cursor;
+	
+	public static boolean gameOver = false;
 
 	public Game() {
 		// Setting up the window
@@ -21,14 +19,12 @@ public class Game extends JFrame {
 		this.setLocationRelativeTo(null);
 		this.setLayout(new GridLayout(1, 1, 0, 0));
 
-		// Key Listeners for key Input
-		addKeyListener(new KeyInput(this));
-		addMouseListener(new MouseInput(this));
-		//addMouseListener(new MouseInput(this));
+		// Mouse and Key Listeners
+		addKeyListener(new KeyInput());
+		addMouseListener(new MouseInput());
 
 		// Create the Screen!
 		screen = new Screen();
-		//screen.getMousePosition();
 		this.add(screen);
 		this.setVisible(true);
 	}
@@ -38,10 +34,8 @@ public class Game extends JFrame {
 		// Start the Game!
 		game = new Game();
 		Tick.Init(game);
-		Game.cursor = Game.screen.getMousePosition();
 
-		while (true)
+		while (!gameOver)
 			Tick.Step();
-		// cursor = game.getCursor();
 	}
 }

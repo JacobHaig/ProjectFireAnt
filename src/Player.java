@@ -5,11 +5,7 @@ import java.util.ArrayList;
 
 public class Player extends Character {
 	public boolean playerDEAD = false;
-	public double angle = -Math.PI / 2;
-	public float AIMSPEED = 0.05f;
-
-	public boolean aimingLeft = false;
-	public boolean aimingRight = false;
+	private double angle = -Math.PI / 2;
 
 	public ArrayList<Bullet> bullets = new ArrayList<Bullet>();
 
@@ -60,7 +56,7 @@ public class Player extends Character {
 		setY(getY() + vy);
 		setX(getX() + vx);
 
-		// Move aiming direction
+		// Set angle at which you are pointing aiming direction
 		setAngle();
 	}
 
@@ -103,13 +99,4 @@ public class Player extends Character {
 	public void setMovingDown(boolean movingDown) {
 		this.movingDown = movingDown;
 	}
-
-	public void setAimingLeft(boolean aimingLeft) {
-		this.aimingLeft = aimingLeft;
-	}
-
-	public void setAimingRight(boolean aimingRight) {
-		this.aimingRight = aimingRight;
-	}
-
 }

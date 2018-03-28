@@ -10,7 +10,6 @@ public class Screen extends JPanel {
 
 	Screen() {
 		// Calling repaint() calls everything need to paint() aswell as paint() itself
-
 		repaint();
 	}
 

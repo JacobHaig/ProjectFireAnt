@@ -1,30 +1,14 @@
-import java.awt.Point;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
 public class KeyInput extends KeyAdapter {
 	Game game;
-	Player player;
-
-	public KeyInput(Game game) {
-		this.game = game;
-		this.player = Tick.player;
-	}
+	Player player = Tick.player;
 
 	// Global Key pressed
 	public void keyPressed(KeyEvent e) {
 		int key = e.getKeyCode();
 
-		// Angle
-		/*
-		if (key == KeyEvent.VK_E)
-			player.setAimingRight(true);
-		else if (key == KeyEvent.VK_Q)
-			player.setAimingLeft(true);
-		//else if (key == KeyEvent)
-		//	player.shoot();
-		*/
-		
 		// Arrow Keys
 		if (key == KeyEvent.VK_RIGHT)
 			player.setMovingRight(true);
@@ -50,12 +34,6 @@ public class KeyInput extends KeyAdapter {
 	public void keyReleased(KeyEvent e) {
 		int key = e.getKeyCode();
 
-		// Angle
-		if (key == KeyEvent.VK_E)
-			player.setAimingRight(false);
-		else if (key == KeyEvent.VK_Q)
-			player.setAimingLeft(false);
-
 		// Arrow Keys
 		if (key == KeyEvent.VK_RIGHT)
 			player.setMovingRight(false);
@@ -77,9 +55,8 @@ public class KeyInput extends KeyAdapter {
 			player.setMovingDown(false);
 
 		if (key == KeyEvent.VK_ESCAPE)
-			System.out.print("PAUSE GAME");
+			Game.gameOver = true;
 
 	}
-
 
 }
