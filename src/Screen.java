@@ -59,6 +59,8 @@ public class Screen extends JPanel {
 				g.drawString("YOU FOOL", 230, 200);
 				g.drawString("YOU DONE DIED", 80, 300);
 			}
+			
+			Inventory.render(g);
 
 			Game.screen.repaint();
 		}

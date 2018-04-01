@@ -6,7 +6,7 @@ import java.awt.image.BufferedImage;
 public class Bullet extends Character {
 	private double angle;
 
-	private double SPEED = 15;
+	private double SPEED = 20;
 	private int WIDTH = 50;
 	private int HEIGHT = 50;
 	private boolean isFI = false;
@@ -39,7 +39,6 @@ public class Bullet extends Character {
 
 	@Override
 	public void render(Graphics g) {
-
 		AffineTransformOp op = new AffineTransformOp(AffineTransform.getRotateInstance(angle, WIDTH, HEIGHT),
 				AffineTransformOp.TYPE_BILINEAR);
 

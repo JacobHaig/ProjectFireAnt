@@ -3,6 +3,7 @@ import java.util.List;
 
 public class Tick extends Game {
 	private static int frameRate = 60;
+	private static int chance = 6000;
 
 	public static Game game;
 	public static List<FallingItem> fallingObjects = new ArrayList<FallingItem>();
@@ -11,9 +12,6 @@ public class Tick extends Game {
 	// Constructor
 	public static void Init(Game g) {
 		game = g;
-		for (int i = 0; i < 100; i++)
-			fallingObjects
-					.add(new FallingItem(Utilities.random(0, WINDOW_WIDTH), Utilities.random(-20 * WINDOW_HEIGHT, 0)));
 	}
 
 	public static void Play() {
@@ -34,6 +32,12 @@ public class Tick extends Game {
 	public static void Step() {
 		Utilities.sleepThread(1000 / frameRate);
 
+		// Randomness of the FallingItem
+		chance -= (chance > 1000 ? 1 : 0);
+		if (Utilities.random(0, (int) (chance / 100)) == 0)
+			fallingObjects.add(new FallingItem(Utilities.random(0, WINDOW_WIDTH), -100)); // The Falling Item
+
+		// If Mouse is in the window
 		if (MouseInput.isMouseInputEnabled())
 			MouseInput.updateMousePos();
 
@@ -45,18 +49,15 @@ public class Tick extends Game {
 			m.step();
 
 		try {
+
 			// Destroy falling objects and remove health if collision
 			for (int m = 0; m < fallingObjects.size(); m++) {
 				if (Utilities.collision(fallingObjects.get(m), player)) {
-
-					if (fallingObjects.get(m).isBandage())
-						Stats.addHealth();
-					else
+					if (!fallingObjects.get(m).isBandage()) // If the item is not a Bandage damage
 						Stats.takeDamage();
 					Inventory.push(fallingObjects.get(m)); // Push FallingItem to the stack
 					fallingObjects.remove(m);
 				}
-
 				if (Stats.getHealth() <= 0)
 					player.playerDEAD = true;
 			}
@@ -74,8 +75,13 @@ public class Tick extends Game {
 				if (player.bullets.get(b).checkPos())
 					player.bullets.remove(b);
 
+			// Destroy fallingObjects if out of bounds
+			for (int o = 0; o < fallingObjects.size(); o++)
+				if (fallingObjects.get(o).getY() > Game.WINDOW_HEIGHT - 100)
+					fallingObjects.remove(o);
+
 		} catch (Exception e) {
-			System.out.println(e);
+			System.out.println(e + "STOP IT");
 		}
 
 		// Draw the screen!
