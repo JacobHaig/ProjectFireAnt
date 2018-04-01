@@ -2,12 +2,14 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
 public class KeyInput extends KeyAdapter {
-	Game game;
 	Player player = Tick.player;
 
 	// Global Key pressed
 	public void keyPressed(KeyEvent e) {
 		int key = e.getKeyCode();
+		
+		if (key == KeyEvent.VK_Y)
+			Game.gameStart = false;
 
 		// Arrow Keys
 		if (key == KeyEvent.VK_RIGHT)
@@ -28,6 +30,9 @@ public class KeyInput extends KeyAdapter {
 			player.setMovingUp(true);
 		else if (key == KeyEvent.VK_S)
 			player.setMovingDown(true);
+	
+		if (key == KeyEvent.VK_ESCAPE)
+			Game.gamePaused = !Game.gamePaused;
 	}
 
 	// Global Key released
@@ -54,8 +59,7 @@ public class KeyInput extends KeyAdapter {
 		else if (key == KeyEvent.VK_S)
 			player.setMovingDown(false);
 
-		if (key == KeyEvent.VK_ESCAPE)
-			Game.gameOver = true;
+		
 
 	}
 

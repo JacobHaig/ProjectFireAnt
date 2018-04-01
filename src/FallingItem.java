@@ -7,7 +7,7 @@ public class FallingItem extends Character {
 	final double DRAG = 1;
 	public ItemType item;
 
-	public enum ItemType {
+	public static enum ItemType {
 		Meteor, Health, Nuke, Rocket;
 	};
 
@@ -43,6 +43,10 @@ public class FallingItem extends Character {
 		WIDTH = imageCurrent.getWidth();
 		HEIGHT = imageCurrent.getHeight();
 	}
+	
+	public boolean isBandage() {
+		return item.equals(ItemType.Health);
+	}
 
 	@Override
 	public void render(Graphics g) {
@@ -60,6 +64,10 @@ public class FallingItem extends Character {
 		g.drawLine((int) getX(), (int) getY(), (int) (getX() + WIDTH), (int) getY());
 	}
 
+	public BufferedImage getImage() {
+		return imageCurrent;
+	}
+	
 	// MOVE THE STUFF
 	public void step() {
 		setY(getY() + GRAVITY);

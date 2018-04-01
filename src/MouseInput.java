@@ -42,8 +42,8 @@ public class MouseInput implements MouseListener {
 	}
 
 	@Override
-	public void mousePressed(MouseEvent arg0) {
-		Tick.player.shoot();
+	public void mousePressed(MouseEvent arg0) {		
+		Tick.player.shoot(arg0);
 	}
 
 	@Override

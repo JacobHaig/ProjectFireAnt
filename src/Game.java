@@ -2,20 +2,22 @@ import java.awt.GridLayout;
 import javax.swing.JFrame;
 
 public class Game extends JFrame {
-	public static int WINDOW_WIDTH = 1000;
+	public static int WINDOW_WIDTH = 1200;
 	public static int WINDOW_HEIGHT = 800;
 
 	public static Game game;
 	public static Screen screen;
 	
 	public static boolean gameOver = false;
+	public static boolean gameStart = true;
+	public static boolean gamePaused = false;
 
 	public Game() {
 		// Setting up the window
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
 		this.setResizable(false);
-		this.setTitle("This is the game name");
+		this.setTitle("Poppit!");
 		this.setLocationRelativeTo(null);
 		this.setLayout(new GridLayout(1, 1, 0, 0));
 
@@ -35,7 +37,7 @@ public class Game extends JFrame {
 		game = new Game();
 		Tick.Init(game);
 
-		while (!gameOver)
-			Tick.Step();
+		while (true)
+			Tick.Play();
 	}
 }

@@ -13,42 +13,47 @@ public class Tick extends Game {
 		game = g;
 		for (int i = 0; i < 100; i++)
 			fallingObjects
-					.add(new FallingItem(Utilities.random(0, WINDOW_WIDTH), Utilities.random(-15 * WINDOW_HEIGHT, 0)));
+					.add(new FallingItem(Utilities.random(0, WINDOW_WIDTH), Utilities.random(-20 * WINDOW_HEIGHT, 0)));
 	}
 
-	// Just wait
-	public static void None() {
-		Utilities.sleepThread(1000 / frameRate);
+	public static void Play() {
+		if (Game.gameStart || Game.gamePaused) {
+			Utilities.sleepThread(1000 / frameRate);
+			Game.screen.repaint();
+		} else if (!Game.gameOver)
+			Step();
 	}
 
 	// Pause Screen
 	public static void Pause() {
 		Utilities.sleepThread(1000 / frameRate);
+		Game.screen.repaint();
 	}
 
 	// Play game like normal
 	public static void Step() {
 		Utilities.sleepThread(1000 / frameRate);
 
-		if (MouseInput.isMouseInputEnabled()) 
+		if (MouseInput.isMouseInputEnabled())
 			MouseInput.updateMousePos();
-		
 
 		// MOVEMENT
 		player.step();
-
 		for (Bullet b : player.bullets)
 			b.step();
-
 		for (FallingItem m : fallingObjects)
 			m.step();
 
 		try {
-
 			// Destroy falling objects and remove health if collision
 			for (int m = 0; m < fallingObjects.size(); m++) {
 				if (Utilities.collision(fallingObjects.get(m), player)) {
-					Stats.takeDamage();
+
+					if (fallingObjects.get(m).isBandage())
+						Stats.addHealth();
+					else
+						Stats.takeDamage();
+					Inventory.push(fallingObjects.get(m)); // Push FallingItem to the stack
 					fallingObjects.remove(m);
 				}
 
@@ -63,6 +68,11 @@ public class Tick extends Game {
 						fallingObjects.remove(m);
 						player.bullets.remove(o);
 					}
+
+			// Destroy Bullets if out of bounds
+			for (int b = 0; b < player.bullets.size(); b++)
+				if (player.bullets.get(b).checkPos())
+					player.bullets.remove(b);
 
 		} catch (Exception e) {
 			System.out.println(e);

@@ -1,5 +1,6 @@
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
@@ -60,8 +61,14 @@ public class Player extends Character {
 		setAngle();
 	}
 
-	public void shoot() {
-		bullets.add(new Bullet(x, y, angle));
+	public void shoot(MouseEvent e) {
+		
+		if ( e.getButton() == 1)
+			bullets.add(new Bullet(x, y, angle));
+		else {
+			bullets.add(new Bullet(x, y, angle, Inventory.peek(0)));
+			Inventory.pop();
+		}
 	}
 
 	public void setAngle(double angle) {
