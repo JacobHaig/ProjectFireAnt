@@ -1,3 +1,4 @@
+import java.awt.Color;
 import java.awt.Graphics;
 import java.util.ArrayList;
 
@@ -18,7 +19,8 @@ public class Inventory {
 
 	// Remove it from the front of the list
 	public static void pop() {
-		stack.remove(0);
+		if (stack.remove(0).isBandage())
+			Stats.addHealth();
 	}
 
 	// get the object without removing it
@@ -38,10 +40,12 @@ public class Inventory {
 
 	// DISPLAY THE LIST
 	public static void render(Graphics g) {
-		for (int i = 0; i < Math.min(4, size()); i++) {
+		for (int i = 0; i < Math.min(5, size()); i++) {
 			FallingItem FI = stack.get(i);
-			g.drawImage(FI.getImage(), (int) 20, (int) i * FI.HEIGHT + 20, FI.WIDTH, FI.HEIGHT, null);
+
+			g.setColor(new Color(150, 20, 25, 100));
+			g.fillOval(10, i * 100, 100, 90 + 10);
+			g.drawImage(FI.getImage(), 60 - FI.WIDTH / 2, i * 100, FI.WIDTH, 90, null);
 		}
 	}
-
 }

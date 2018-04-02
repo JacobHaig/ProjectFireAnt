@@ -3,12 +3,13 @@ import java.awt.Graphics;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
+import java.util.List;
 
 public class Player extends Character {
-	public boolean playerDEAD = false;
+	public static boolean playerDead = false;
 	private double angle = -Math.PI / 2;
 
-	public ArrayList<Bullet> bullets = new ArrayList<Bullet>();
+	private ArrayList<Bullet> bullets = new ArrayList<>();
 
 	private BufferedImage imageRunning = Images.getImage("stick-man.png");
 	private BufferedImage imageStanding = Images.getImage("stick-man-standing.png");
@@ -24,6 +25,10 @@ public class Player extends Character {
 		drawAngle(g);
 	}
 
+	public List<Bullet> getBullets(){
+		return bullets;
+	}
+	
 	// Draw the set image
 	public void drawImage(Graphics g) {
 		if (movingLeft && !(movingRight))
@@ -51,8 +56,8 @@ public class Player extends Character {
 	// Move the player and set angle
 	public void step() {
 		// Move player
-		vy = (((movingDown) ? 1 : 0) - ((movingUp) ? 1 : 0)) * SPEED * DRAG; // Up and Down
-		vx = (((movingRight) ? 1 : 0) - ((movingLeft) ? 1 : 0)) * SPEED * DRAG; // Left and Right
+		vy = ((movingDown ? 1 : 0) - (movingUp ? 1 : 0)) * SPEED * DRAG; // Up and Down
+		vx = ((movingRight ? 1 : 0) - (movingLeft ? 1 : 0)) * SPEED * DRAG; // Left and Right
 
 		setY(getY() + vy);
 		setX(getX() + vx);
@@ -61,9 +66,9 @@ public class Player extends Character {
 		setAngle();
 	}
 
+	// Shoot 
 	public void shoot(MouseEvent e) {
-		
-		if ( e.getButton() == 1)
+		if (e.getButton() == 1)
 			bullets.add(new Bullet(x, y, angle));
 		else {
 			bullets.add(new Bullet(x, y, angle, Inventory.peek(0)));

@@ -6,9 +6,9 @@ import java.awt.image.BufferedImage;
 import javax.swing.JPanel;
 
 public class Screen extends JPanel {
-	private static BufferedImage background = Images.getImage("Game-Background.png");
-	private static BufferedImage menu = Images.getImage("Game-Menu.png");
-	private static BufferedImage pause = Images.getImage("Game-Pause.png");
+	private static BufferedImage backgroundImage = Images.getImage("Game-Background.png");
+	private static BufferedImage menuImage = Images.getImage("Game-Menu.png");
+	private static BufferedImage pauseImage = Images.getImage("Game-Pause.png");
 
 	Screen() { // Calling repaint() calls everything need to paint() aswell as paint() itself
 		repaint();
@@ -16,55 +16,49 @@ public class Screen extends JPanel {
 
 	// Clear the screen
 	private void clearScreen(Graphics g) {
-		g.drawImage(background, 0, 0, this.getWidth(), this.getHeight(), null);
+		g.drawImage(backgroundImage, 0, 0, this.getWidth(), this.getHeight(), null);
+		g.setColor(new Color(0, 0, 0));
 	}
 
-	public void Menu(Graphics g) {
-		g.drawImage(menu, 0, 0, this.getWidth(), this.getHeight(), null);
+	public void drawMenu(Graphics g) { // Draw the main menu
+		g.drawImage(menuImage, 0, 0, this.getWidth(), this.getHeight(), null);
 	}
 
-	public void Pause(Graphics g) {
-		g.drawImage(pause, 0, 0, this.getWidth(), this.getHeight(), null);
+	public void drawPause(Graphics g) { // Draw the pause menu
+		g.drawImage(pauseImage, 0, 0, this.getWidth(), this.getHeight(), null);
 	}
 
 	@Override
 	public void paint(Graphics g) {
 
-		if (Game.gameStart)
-			Menu(g);
-		else if (Game.gamePaused)
-			Pause(g);
-
+		if (Game.gameStart) // Draw the main menu
+			drawMenu(g); 
+		
+		else if (Game.gamePaused) // Draw the pause menu
+			drawPause(g);
+		
 		else {
-			// Clear the screen
 			clearScreen(g);
+			Tick.player.render(g); // Draw the Player
 
-			g.setColor(new Color(0, 0, 0));
-
-			// Draw the Player
-			Tick.player.render(g);
-
-			for (Bullet b : Tick.player.bullets)
+			for (Bullet b : Tick.player.getBullets()) // Draw the Bullets
 				b.render(g);
-
-			for (FallingItem o : Tick.fallingObjects)
+			for (FallingItem o : Tick.getFallingObjects()) // Draw the FallingObjects
 				o.render(g);
 
-			Stats.render(g);
+			Stats.render(g); // Draw any Statistics
+			Inventory.render(g); // Draw the STACK <<<--------------------
 
-			if (Tick.player.playerDEAD) {
+			if (Player.playerDead) {
 				Font font = new Font("SansSerif", Font.BOLD, 108);
 				g.setFont(font);
-
-				g.drawString("YOU FOOL", 230, 200);
-				g.drawString("YOU DONE DIED", 80, 300);
+				
+				g.setColor(new Color(255, 0, 0));
+				g.drawString("YOU FOOL", 290, 200);
+				g.drawString("YOU DONE DIED", 150, 300);
 			}
-			
-			Inventory.render(g);
-
 			Game.screen.repaint();
 		}
 
 	}
-
 }

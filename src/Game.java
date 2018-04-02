@@ -1,13 +1,14 @@
 import java.awt.GridLayout;
+
 import javax.swing.JFrame;
 
 public class Game extends JFrame {
-	public static int WINDOW_WIDTH = 1200;
-	public static int WINDOW_HEIGHT = 800;
+	public static final int WINDOW_WIDTH = 1200;
+	public static final int WINDOW_HEIGHT = 800;
 
 	public static Game game;
 	public static Screen screen;
-	
+
 	public static boolean gameOver = false;
 	public static boolean gameStart = true;
 	public static boolean gamePaused = false;
@@ -29,15 +30,18 @@ public class Game extends JFrame {
 		screen = new Screen();
 		this.add(screen);
 		this.setVisible(true);
+
 	}
 
 	// Main
 	public static void main(String[] args) {
 		// Start the Game!
 		game = new Game();
-		Tick.Init(game);
+		Tick.init(game);
 
-		while (true)
-			Tick.Play();
+		new Music();
+
+		while (!false) 
+			Tick.play();
 	}
 }
