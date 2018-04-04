@@ -12,7 +12,7 @@ public class Tick extends Game {
 	// Constructor
 	public static void init(Game g) {
 		game = g;
-		player = new Player(100, 600);
+		player = new Player(100, 650);
 	}
 
 	public static List<FallingItem> getFallingObjects() {
